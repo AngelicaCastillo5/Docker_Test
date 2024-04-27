@@ -1,0 +1,29 @@
+crear red en docker 
+
+docker network create nombre_de_red
+
+crear contenedor emqx en la red creada 
+docker run -d -v C:/Users/angelicaCastillo/Documents/docker/emqx:/opt/emqx/data --name emqx --network test -p 1883:1883 -p 8083:8083 -p 8084:8084 -p 8883:8883 -p 18083:18083  emqx/emqx:latest
+credenciales:
+admin:
+password:
+
+Crear contenedor node red en la red creada 
+docker run -d -v C:/Users/angelicaCastillo/Documents/docker/nodered:/data --name nodered --network test -p 1880:1880 nodered/node-red
+
+
+Crear grafana contenedor
+docker run -d -v C:/Users/angelicaCastillo/Documents/docker/grafana:/var/lib/grafana --network test -p 3000:3000 --name grafana grafana/grafana:latest
+
+Crear contenedor mongo
+docker run -d --name mongodb --network test -p 27017:27017 -v C:/Users/angelicaCastillo/Documents/docker/mongo:/data/db mongodb/mongodb-community-server:latest
+
+
+
+
+Docker-compose
+
+para eliminar todos los contenedores apagados 
+ docker rm $(docker ps -a -q)
+
+
